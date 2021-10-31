@@ -16,4 +16,7 @@ startButton.addEventListener("click", function () {
     else
         startButton.textContent = "⏳ Start Counter";
 });
-stopButton.addEventListener("click", function () { return clock.restartClock(); });
+stopButton.addEventListener("click", function () {
+    clock.restartClock();
+    startButton.textContent = "⏳ Start Counter";
+});

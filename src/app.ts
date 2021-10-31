@@ -21,4 +21,7 @@ startButton.addEventListener("click", () => {
     if (clock.getTimeIsCounting()) startButton.textContent = "⏸️ Pause Counter";
     else startButton.textContent = "⏳ Start Counter";
 })
-stopButton.addEventListener("click", () => clock.restartClock())
+stopButton.addEventListener("click", () => {
+    clock.restartClock();
+    startButton.textContent = "⏳ Start Counter";
+})
