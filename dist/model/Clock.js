@@ -9,6 +9,9 @@ var Clock = /** @class */ (function () {
                 _this.reduceOneSecond();
         }, 1000);
     }
+    Clock.prototype.getTimeIsCounting = function () {
+        return this._counting;
+    };
     Clock.prototype.getTime = function () {
         return Math.floor(this._seconds / 60) + ":" + this._seconds % 60;
     };
@@ -20,6 +23,9 @@ var Clock = /** @class */ (function () {
     };
     Clock.prototype.pauseClock = function () {
         this._counting = false;
+    };
+    Clock.prototype.toggleCounting = function () {
+        this._counting = !this._counting;
     };
     Clock.prototype.restartClock = function () {
         this.pauseClock();

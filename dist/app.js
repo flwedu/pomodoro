@@ -9,5 +9,11 @@ function updateView() {
     app.textContent = clock.getTime();
 }
 // Buttons
-startButton.addEventListener("click", function () { return clock.startClock(); });
+startButton.addEventListener("click", function () {
+    clock.toggleCounting();
+    if (clock.getTimeIsCounting())
+        startButton.textContent = "⏸️ Pause Counter";
+    else
+        startButton.textContent = "⏳ Start Counter";
+});
 stopButton.addEventListener("click", function () { return clock.restartClock(); });

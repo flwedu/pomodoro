@@ -16,6 +16,10 @@ export default class Clock {
 
     }
 
+    getTimeIsCounting() {
+        return this._counting;
+    }
+
     getTime() {
         return `${Math.floor(this._seconds / 60)}:${this._seconds % 60}`;
     }
@@ -30,6 +34,10 @@ export default class Clock {
 
     pauseClock() {
         this._counting = false;
+    }
+
+    toggleCounting() {
+        this._counting = !this._counting;
     }
 
     restartClock() {

@@ -15,5 +15,10 @@ function updateView() {
 }
 
 // Buttons
-startButton.addEventListener("click", () => clock.startClock())
+startButton.addEventListener("click", () => {
+    clock.toggleCounting();
+
+    if (clock.getTimeIsCounting()) startButton.textContent = "⏸️ Pause Counter";
+    else startButton.textContent = "⏳ Start Counter";
+})
 stopButton.addEventListener("click", () => clock.restartClock())
