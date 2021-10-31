@@ -1,15 +1,13 @@
 import Clock from "./model/Clock.js";
-var app = document.querySelector("#app");
+var app = document.getElementById("app");
 var startButton = document.querySelector(".button__start");
-var pauseButton = document.querySelector(".button__pause");
-var endButton = document.querySelector(".button__end");
+var stopButton = document.querySelector(".button__stop");
 // View
-var clock = new Clock(1);
+var clock = new Clock(25);
 setInterval(updateView, 1000);
 function updateView() {
     app.textContent = clock.getTime();
 }
 // Buttons
 startButton.addEventListener("click", function () { return clock.startClock(); });
-pauseButton.addEventListener("click", function () { return clock.pauseClock(); });
-endButton.addEventListener("click", function () { return clock.restartClock(); });
+stopButton.addEventListener("click", function () { return clock.restartClock(); });
