@@ -1,34 +1,43 @@
-import Time from "./Time.js";
 
 export default class Clock {
 
-    private _time: Time;
-    private _initialMinuts: number;
+    private _counting: boolean;
+    private _initialSeconds: number;
+    private _seconds: number;
 
     constructor(initialMinuts: number) {
-        this._initialMinuts = initialMinuts;
-        this._time = new Time(initialMinuts);
+        this._counting = false;
+        this._initialSeconds = initialMinuts * 60;
+        this._seconds = this._initialSeconds;
+
+        setInterval(() => {
+            if (this._counting) this.reduceOneSecond()
+        }, 1000);
+
     }
 
     getTime() {
-        const seconds = this._time.getSeconds();
-        return `${Math.floor(seconds / 60)}:${seconds % 60}`;
+        return `${Math.floor(this._seconds / 60)}:${this._seconds % 60}`;
     }
 
     getTimeinSeconds() {
-        return this._time.getSeconds();
+        return this._seconds;
     }
 
     startClock() {
-        this._time.startCounter();
+        this._counting = true;
     }
 
     pauseClock() {
-        this._time.pauseCounter();
+        this._counting = false;
     }
 
     restartClock() {
         this.pauseClock();
-        this._time = new Time(this._initialMinuts);
+        this._seconds = this._initialSeconds;
+    }
+
+    private reduceOneSecond() {
+        this._seconds--;
     }
 }

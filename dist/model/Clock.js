@@ -1,25 +1,32 @@
-import Time from "./Time.js";
 var Clock = /** @class */ (function () {
     function Clock(initialMinuts) {
-        this._initialMinuts = initialMinuts;
-        this._time = new Time(initialMinuts);
+        var _this = this;
+        this._counting = false;
+        this._initialSeconds = initialMinuts * 60;
+        this._seconds = this._initialSeconds;
+        setInterval(function () {
+            if (_this._counting)
+                _this.reduceOneSecond();
+        }, 1000);
     }
     Clock.prototype.getTime = function () {
-        var seconds = this._time.getSeconds();
-        return Math.floor(seconds / 60) + ":" + seconds % 60;
+        return Math.floor(this._seconds / 60) + ":" + this._seconds % 60;
     };
     Clock.prototype.getTimeinSeconds = function () {
-        return this._time.getSeconds();
+        return this._seconds;
     };
     Clock.prototype.startClock = function () {
-        this._time.startCounter();
+        this._counting = true;
     };
     Clock.prototype.pauseClock = function () {
-        this._time.pauseCounter();
+        this._counting = false;
     };
     Clock.prototype.restartClock = function () {
         this.pauseClock();
-        this._time = new Time(this._initialMinuts);
+        this._seconds = this._initialSeconds;
+    };
+    Clock.prototype.reduceOneSecond = function () {
+        this._seconds--;
     };
     return Clock;
 }());
