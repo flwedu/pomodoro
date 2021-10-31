@@ -1,0 +1,16 @@
+@import "variables";
+@import "mixins";
+
+#app {
+  font-size: large;
+}
+
+.button {
+  &__start {
+    @include button($buttonDefault);
+  }
+
+  &__stop {
+    @include button($buttonStop);
+  }
+}

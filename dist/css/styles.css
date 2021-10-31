@@ -1,1 +1,19 @@
-/* No CSS */
+#app {
+  font-size: large;
+}
+
+.button__start {
+  font-weight: bold;
+  border: 1px solid #00a3cc;
+  background-color: transparent;
+  border-radius: 3px;
+  color: #00a3cc;
+}
+
+.button__stop {
+  font-weight: bold;
+  border: 1px solid #fb0000;
+  background-color: transparent;
+  border-radius: 3px;
+  color: #fb0000;
+}
