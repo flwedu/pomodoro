@@ -9,6 +9,15 @@
 .button__start {
   font-family: "Roboto", sans-serif;
   font-weight: bold;
+  border: 1px solid #ffee01;
+  background-color: transparent;
+  border-radius: 3px;
+  color: #ffee01;
+}
+
+.button__start.paused {
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
   border: 1px solid #00a3cc;
   background-color: transparent;
   border-radius: 3px;

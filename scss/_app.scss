@@ -6,13 +6,3 @@
   font-family: "Roboto", sans-serif;
   font-size: 7rem;
 }
-
-.button {
-  &__start {
-    @include button($buttonDefault);
-  }
-
-  &__stop {
-    @include button($buttonStop);
-  }
-}

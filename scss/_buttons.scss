@@ -1,0 +1,13 @@
+.button {
+  &__start {
+    @include button($buttonPause);
+
+    &.paused {
+      @include button($buttonDefault);
+    }
+  }
+
+  &__stop {
+    @include button($buttonStop);
+  }
+}
