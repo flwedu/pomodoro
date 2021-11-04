@@ -6,4 +6,9 @@ A técnica é consiste em se dividir o tempo dos estudos em alguns minutos para 
 
 # Em desenvolvimento
 
-[] Opcao de ajustar os tempos de foco e descanso;
+- Aplicação deve cronometrar o tempo; ✔️
+- Opcao de ajustar os tempos de foco e descanso; 🤞
+- Aplicação deve manter histórico de quantos minutos já foram cronometrados; 🤞
+- O usuário pode personalizar os sons de notificação; 🤞
+- O usuário pode exportar seu histórico; 🤞
+ 
