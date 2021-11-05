@@ -1,6 +1,6 @@
 import { updateStartButton } from "./buttonsFunctions.js";
+import { openConfigurationsWindow } from "./configurations.js";
 import Clock from "./model/Clock.js";
-import { revealElement } from "./viewFunctions.js";
 var focusButton = document.getElementById("button__focus");
 var endButton = document.getElementById("button__end");
 var relaxButton = document.getElementById("button__relax");
@@ -18,7 +18,7 @@ endButton.addEventListener("click", function () {
     focusButton.classList.add('paused');
 });
 openConfigurationsButton.addEventListener("click", function () {
-    revealElement(document.getElementById("configurations"));
+    openConfigurationsWindow();
 });
 // View
 var clock = new Clock(25);

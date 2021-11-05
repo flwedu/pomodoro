@@ -1,4 +1,5 @@
 import { updateStartButton } from "./buttonsFunctions.js";
+import { openConfigurationsWindow } from "./configurations.js";
 import Clock from "./model/Clock.js";
 import { hideElement, revealElement } from "./viewFunctions.js";
 
@@ -22,7 +23,7 @@ endButton.addEventListener("click", () => {
 })
 
 openConfigurationsButton.addEventListener("click", () => {
-    revealElement(document.getElementById("configurations"));
+    openConfigurationsWindow();
 })
 
 // View
