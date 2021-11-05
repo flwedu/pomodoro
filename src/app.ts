@@ -1,21 +1,21 @@
 import { updateStartButton } from "./buttonsFunctions.js";
 import Clock from "./model/Clock.js";
 
-const startButton: HTMLElement = document.querySelector(".button__start");
-const stopButton: HTMLElement = document.querySelector(".button__stop");
+const focusButton: HTMLElement = document.getElementById("button__focus");
+const endButton: HTMLElement = document.getElementById("button__end");
 
 const app: HTMLElement = document.getElementById("app");
 
 // Buttons
-startButton.addEventListener("click", () => {
+focusButton.addEventListener("click", () => {
     clock.toggleCounting();
-    startButton.classList.toggle("paused", !clock.getTimeIsCounting())
-    startButton.textContent = updateStartButton(clock.getTimeIsCounting());
+    focusButton.classList.toggle("paused", !clock.getTimeIsCounting())
+    focusButton.textContent = updateStartButton(clock.getTimeIsCounting());
 })
-stopButton.addEventListener("click", () => {
+endButton.addEventListener("click", () => {
     clock.restartClock();
-    startButton.textContent = updateStartButton(false);
-    startButton.classList.add('paused');
+    focusButton.textContent = updateStartButton(false);
+    focusButton.classList.add('paused');
 })
 
 // View
