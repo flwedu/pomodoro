@@ -12,6 +12,9 @@ export const EventEmitter = {
 
     emit: (topic: string, data: any) => {
         const listeners = EventEmitter.events.get(topic)
-        listeners.forEach(event => event(data))
+        if (listeners && listeners.length) {
+            listeners.forEach(event => event(data))
+
+        }
     }
 }

@@ -17,6 +17,8 @@ export var EventEmitter = {
     },
     emit: function (topic, data) {
         var listeners = EventEmitter.events.get(topic);
-        listeners.forEach(function (event) { return event(data); });
+        if (listeners && listeners.length) {
+            listeners.forEach(function (event) { return event(data); });
+        }
     }
 };
