@@ -1,7 +1,6 @@
-import { updateStartButton } from "./buttonsFunctions.js";
 import { openConfigurationsWindow } from "./configurations.js";
 import Clock from "./model/Clock.js";
-import { hideElement, revealElement } from "./viewFunctions.js";
+import { appPaused, IStatus } from "./model/status.js";
 
 const focusButton: HTMLElement = document.getElementById("button__focus");
 const endButton: HTMLElement = document.getElementById("button__end");
@@ -9,17 +8,19 @@ const relaxButton: HTMLElement = document.getElementById("button__relax");
 const openConfigurationsButton: HTMLElement = document.getElementById("button__configurations");
 
 const app: HTMLElement = document.getElementById("app");
+const appStatus: IStatus = appPaused;
 
 // Buttons
 focusButton.addEventListener("click", () => {
-    clock.toggleCounting();
-    focusButton.classList.toggle("paused", !clock.getTimeIsCounting())
-    focusButton.textContent = updateStartButton(clock.getTimeIsCounting());
+    appStatus.focusButtonAction(clock);
 })
+
+relaxButton.addEventListener("click", () => {
+    appStatus.relaxButtonAction(clock);
+})
+
 endButton.addEventListener("click", () => {
-    clock.restartClock();
-    focusButton.textContent = updateStartButton(false);
-    focusButton.classList.add('paused');
+    appStatus.endButtonAction(clock);
 })
 
 openConfigurationsButton.addEventListener("click", () => {

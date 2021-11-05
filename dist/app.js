@@ -1,21 +1,21 @@
-import { updateStartButton } from "./buttonsFunctions.js";
 import { openConfigurationsWindow } from "./configurations.js";
 import Clock from "./model/Clock.js";
+import { appPaused } from "./model/status.js";
 var focusButton = document.getElementById("button__focus");
 var endButton = document.getElementById("button__end");
 var relaxButton = document.getElementById("button__relax");
 var openConfigurationsButton = document.getElementById("button__configurations");
 var app = document.getElementById("app");
+var appStatus = appPaused;
 // Buttons
 focusButton.addEventListener("click", function () {
-    clock.toggleCounting();
-    focusButton.classList.toggle("paused", !clock.getTimeIsCounting());
-    focusButton.textContent = updateStartButton(clock.getTimeIsCounting());
+    appStatus.focusButtonAction(clock);
+});
+relaxButton.addEventListener("click", function () {
+    appStatus.relaxButtonAction(clock);
 });
 endButton.addEventListener("click", function () {
-    clock.restartClock();
-    focusButton.textContent = updateStartButton(false);
-    focusButton.classList.add('paused');
+    appStatus.endButtonAction(clock);
 });
 openConfigurationsButton.addEventListener("click", function () {
     openConfigurationsWindow();
