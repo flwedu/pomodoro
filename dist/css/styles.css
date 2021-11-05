@@ -6,7 +6,11 @@
   font-size: 7rem;
 }
 
-.button__start {
+.hidden {
+  display: none;
+}
+
+.button__focus {
   font-family: "Roboto", sans-serif;
   font-weight: bold;
   border: 1px solid #ffee01;
@@ -15,13 +19,22 @@
   color: #ffee01;
 }
 
-.button__start.paused {
+.button__focus.paused {
   font-family: "Roboto", sans-serif;
   font-weight: bold;
   border: 1px solid #00a3cc;
   background-color: transparent;
   border-radius: 3px;
   color: #00a3cc;
+}
+
+.button__relax {
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  border: 1px solid #8c62e0;
+  background-color: transparent;
+  border-radius: 3px;
+  color: #8c62e0;
 }
 
 .button__stop {
@@ -31,4 +44,14 @@
   background-color: transparent;
   border-radius: 3px;
   color: #fb0000;
+}
+
+.disabled {
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  border: 1px solid #b8b8b8;
+  background-color: transparent;
+  border-radius: 3px;
+  color: #b8b8b8;
+  color: #b8b8b8;
 }
