@@ -4,3 +4,9 @@ export var revealElement = function (element) {
 export var hideElement = function (element) {
     element.classList.add("hidden");
 };
+export var disableElement = function (element) {
+    element.classList.add("disabled");
+};
+export var enableElement = function (element) {
+    element.classList.remove("disabled");
+};
