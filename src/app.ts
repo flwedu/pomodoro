@@ -1,15 +1,16 @@
 import { openConfigurationsWindow } from "./configurations.js";
 import { EventEmitter } from "./core/EventEmitter.js";
 import Clock from "./model/Clock.js";
-import { appPaused, IStatus } from "./model/status.js";
+import { appPaused } from "./model/status.js";
 
-const focusButton: HTMLElement = document.getElementById("button__focus");
-const endButton: HTMLElement = document.getElementById("button__end");
-const relaxButton: HTMLElement = document.getElementById("button__relax");
 const openConfigurationsButton: HTMLElement = document.getElementById("button__configurations");
+const app: HTMLElement = document.getElementById("app");
+
+const clock = new Clock(25);
+var appStatus: any = appPaused;
+appStatus.onChange(clock);
 
 // View
-const clock = new Clock(25);
 
 setInterval(updateView, 1000);
 
@@ -18,7 +19,7 @@ function updateView() {
 }
 
 // Listening to events
-EventEmitter.listen("ChangeStatus", (newAppStatus: IStatus) => {
+EventEmitter.listen("ChangeStatus", (newAppStatus: any) => {
     appStatus = newAppStatus;
     appStatus.onChange(clock);
 })
@@ -27,22 +28,8 @@ EventEmitter.listen("ChangeClock", (initialMinuts: number) => {
     clock.changeInitialMinuts(initialMinuts);
 })
 
-const app: HTMLElement = document.getElementById("app");
-var appStatus: IStatus = appPaused;
-appStatus.onChange();
-
-// Buttons
-focusButton.addEventListener("click", () => {
-    appStatus.focusButtonAction(clock);
-})
-
-relaxButton.addEventListener("click", () => {
-    appStatus.relaxButtonAction(clock);
-})
-
-endButton.addEventListener("click", () => {
-    appStatus.endButtonAction(clock);
-})
+// Listening to buttons click
+document.querySelectorAll(".button").forEach(button => { button.addEventListener("click", () => appStatus[button.id](clock)) });
 
 openConfigurationsButton.addEventListener("click", () => {
     openConfigurationsWindow();
