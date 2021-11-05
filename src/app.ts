@@ -1,4 +1,5 @@
 import { openConfigurationsWindow } from "./configurations.js";
+import { EventEmitter } from "./core/EventEmitter.js";
 import Clock from "./model/Clock.js";
 import { appPaused, IStatus } from "./model/status.js";
 
@@ -16,18 +17,19 @@ function updateView() {
     app.textContent = clock.getTime();
 }
 
-/**
- * This function works like a event emitter, changing the appStatus when it is called.
- * @param newAppStatus 
- */
-export const updateStatus = function (newAppStatus: IStatus) {
+// Listening to events
+EventEmitter.listen("ChangeStatus", (newAppStatus: IStatus) => {
     appStatus = newAppStatus;
     appStatus.onChange(clock);
-    return appStatus;
-}
+})
+
+EventEmitter.listen("ChangeClock", (initialMinuts: number) => {
+    clock.changeInitialMinuts(initialMinuts);
+})
 
 const app: HTMLElement = document.getElementById("app");
-var appStatus: IStatus = updateStatus(appPaused);
+var appStatus: IStatus = appPaused;
+appStatus.onChange();
 
 // Buttons
 focusButton.addEventListener("click", () => {

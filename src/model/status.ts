@@ -1,5 +1,5 @@
-import { updateStatus } from "../app.js";
 import { updateStartButton } from "../buttonsFunctions.js";
+import { EventEmitter } from "../core/EventEmitter.js";
 import { disableElement, enableElement } from "../viewFunctions.js";
 import Clock from "./Clock.js"
 
@@ -29,7 +29,7 @@ export const focusRunning: IStatus = {
     },
 
     focusButtonAction: (clock: Clock) => {
-        updateStatus(appPaused);
+        EventEmitter.emit("ChangeStatus", appPaused);
     },
 
     relaxButtonAction: (clock: Clock) => {
@@ -37,7 +37,7 @@ export const focusRunning: IStatus = {
     },
 
     endButtonAction: (clock: Clock) => {
-        updateStatus(appStopped);
+        EventEmitter.emit("ChangeStatus", appStopped);
     }
 }
 
@@ -55,11 +55,11 @@ export const appPaused: IStatus = {
     },
 
     relaxButtonAction: (clock: Clock) => {
-        updateStatus(focusRunning);
+        EventEmitter.emit("ChangeStatus", focusRunning);
     },
 
     endButtonAction: (clock: Clock) => {
-        updateStatus(appStopped);
+        EventEmitter.emit("ChangeStatus", appStopped);
     }
 }
 
@@ -73,11 +73,11 @@ export const appStopped: IStatus = {
     },
 
     focusButtonAction: (clock: Clock) => {
-        updateStatus(focusRunning);
+        EventEmitter.emit("ChangeStatus", focusRunning);
     },
 
     relaxButtonAction: (clock: Clock) => {
-        updateStatus(relaxRunning);
+        EventEmitter.emit("ChangeStatus", relaxRunning);
     },
 
     endButtonAction: (clock: Clock) => {
@@ -91,7 +91,7 @@ export const relaxRunning: IStatus = {
     },
 
     focusButtonAction: (clock: Clock) => {
-        updateStatus(focusRunning);
+        EventEmitter.emit("ChangeStatus", focusRunning);
     },
 
     relaxButtonAction: (clock: Clock) => {
@@ -99,6 +99,6 @@ export const relaxRunning: IStatus = {
     },
 
     endButtonAction: (clock: Clock) => {
-        updateStatus(appStopped);
+        EventEmitter.emit("ChangeStatus", appStopped);
     }
 }

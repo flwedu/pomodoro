@@ -1,4 +1,5 @@
 import { openConfigurationsWindow } from "./configurations.js";
+import { EventEmitter } from "./core/EventEmitter.js";
 import Clock from "./model/Clock.js";
 import { appPaused } from "./model/status.js";
 var focusButton = document.getElementById("button__focus");
@@ -11,17 +12,17 @@ setInterval(updateView, 1000);
 function updateView() {
     app.textContent = clock.getTime();
 }
-/**
- * This function works like a event emitter, changing the appStatus when it is called.
- * @param newAppStatus
- */
-export var updateStatus = function (newAppStatus) {
+// Listening to events
+EventEmitter.listen("ChangeStatus", function (newAppStatus) {
     appStatus = newAppStatus;
     appStatus.onChange(clock);
-    return appStatus;
-};
+});
+EventEmitter.listen("ChangeClock", function (initialMinuts) {
+    clock.changeInitialMinuts(initialMinuts);
+});
 var app = document.getElementById("app");
-var appStatus = updateStatus(appPaused);
+var appStatus = appPaused;
+appStatus.onChange();
 // Buttons
 focusButton.addEventListener("click", function () {
     appStatus.focusButtonAction(clock);

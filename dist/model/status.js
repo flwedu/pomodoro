@@ -1,5 +1,5 @@
-import { updateStatus } from "../app.js";
 import { updateStartButton } from "../buttonsFunctions.js";
+import { EventEmitter } from "../core/EventEmitter.js";
 import { disableElement, enableElement } from "../viewFunctions.js";
 var focusButton = document.getElementById("button__focus");
 var endButton = document.getElementById("button__end");
@@ -11,12 +11,12 @@ export var focusRunning = {
         clock.startClock();
     },
     focusButtonAction: function (clock) {
-        updateStatus(appPaused);
+        EventEmitter.emit("ChangeStatus", appPaused);
     },
     relaxButtonAction: function (clock) {
     },
     endButtonAction: function (clock) {
-        updateStatus(appStopped);
+        EventEmitter.emit("ChangeStatus", appStopped);
     }
 };
 export var appPaused = {
@@ -30,10 +30,10 @@ export var appPaused = {
         focusButton.textContent = updateStartButton(clock.getTimeIsCounting());
     },
     relaxButtonAction: function (clock) {
-        updateStatus(focusRunning);
+        EventEmitter.emit("ChangeStatus", focusRunning);
     },
     endButtonAction: function (clock) {
-        updateStatus(appStopped);
+        EventEmitter.emit("ChangeStatus", appStopped);
     }
 };
 export var appStopped = {
@@ -44,10 +44,10 @@ export var appStopped = {
         focusButton.classList.add('paused');
     },
     focusButtonAction: function (clock) {
-        updateStatus(focusRunning);
+        EventEmitter.emit("ChangeStatus", focusRunning);
     },
     relaxButtonAction: function (clock) {
-        updateStatus(relaxRunning);
+        EventEmitter.emit("ChangeStatus", relaxRunning);
     },
     endButtonAction: function (clock) {
         disableElement(endButton);
@@ -58,11 +58,11 @@ export var relaxRunning = {
         disableElement(relaxButton);
     },
     focusButtonAction: function (clock) {
-        updateStatus(focusRunning);
+        EventEmitter.emit("ChangeStatus", focusRunning);
     },
     relaxButtonAction: function (clock) {
     },
     endButtonAction: function (clock) {
-        updateStatus(appStopped);
+        EventEmitter.emit("ChangeStatus", appStopped);
     }
 };
