@@ -3,24 +3,11 @@ import { EventEmitter } from "../core/EventEmitter.js";
 import { disableElement, enableElement } from "../viewFunctions.js";
 import Clock from "./Clock.js"
 
-/**
- * This class abstract the behaviour and attibutes of each button according to the application status.
- */
-export interface IStatus {
-
-    /* onChange is fired when the status is changed */
-    onChange: Function;
-
-    focusButtonAction: Function;
-    relaxButtonAction: Function;
-    endButtonAction: Function;
-}
-
 const focusButton: HTMLElement = document.getElementById("button__focus");
-const endButton: HTMLElement = document.getElementById("button__end");
 const relaxButton: HTMLElement = document.getElementById("button__relax");
+const endButton: HTMLElement = document.getElementById("button__end");
 
-export const focusRunning: IStatus = {
+export const focusRunning = {
 
     onChange: (clock: Clock) => {
         focusButton.textContent = updateStartButton(true);
@@ -28,42 +15,42 @@ export const focusRunning: IStatus = {
         clock.startClock();
     },
 
-    focusButtonAction: (clock: Clock) => {
+    button__focus: (clock: Clock) => {
         EventEmitter.emit("ChangeStatus", appPaused);
     },
 
-    relaxButtonAction: (clock: Clock) => {
+    button__relax: (clock: Clock) => {
 
     },
 
-    endButtonAction: (clock: Clock) => {
+    button__end: (clock: Clock) => {
         EventEmitter.emit("ChangeStatus", appStopped);
     }
 }
 
-export const appPaused: IStatus = {
+export const appPaused = {
 
     onChange: (clock: Clock) => {
         enableElement(focusButton, relaxButton)
         clock.pauseClock();
     },
 
-    focusButtonAction: (clock: Clock) => {
+    button__focus: (clock: Clock) => {
         clock.toggleCounting();
         focusButton.classList.toggle("paused", !clock.getTimeIsCounting())
         focusButton.textContent = updateStartButton(clock.getTimeIsCounting());
     },
 
-    relaxButtonAction: (clock: Clock) => {
+    button__relax: (clock: Clock) => {
         EventEmitter.emit("ChangeStatus", focusRunning);
     },
 
-    endButtonAction: (clock: Clock) => {
+    button__end: (clock: Clock) => {
         EventEmitter.emit("ChangeStatus", appStopped);
     }
 }
 
-export const appStopped: IStatus = {
+export const appStopped = {
 
     onChange: (clock: Clock) => {
         clock.restartClock();
@@ -72,33 +59,33 @@ export const appStopped: IStatus = {
         focusButton.classList.add('paused');
     },
 
-    focusButtonAction: (clock: Clock) => {
+    button__focus: (clock: Clock) => {
         EventEmitter.emit("ChangeStatus", focusRunning);
     },
 
-    relaxButtonAction: (clock: Clock) => {
+    button__relax: (clock: Clock) => {
         EventEmitter.emit("ChangeStatus", relaxRunning);
     },
 
-    endButtonAction: (clock: Clock) => {
+    button__end: (clock: Clock) => {
         disableElement(endButton);
     }
 }
-export const relaxRunning: IStatus = {
+export const relaxRunning = {
 
     onChange: (clock: Clock) => {
         disableElement(relaxButton);
     },
 
-    focusButtonAction: (clock: Clock) => {
+    button__focus: (clock: Clock) => {
         EventEmitter.emit("ChangeStatus", focusRunning);
     },
 
-    relaxButtonAction: (clock: Clock) => {
+    button__relax: (clock: Clock) => {
 
     },
 
-    endButtonAction: (clock: Clock) => {
+    button__end: (clock: Clock) => {
         EventEmitter.emit("ChangeStatus", appStopped);
     }
 }
