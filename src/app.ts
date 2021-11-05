@@ -7,8 +7,27 @@ const endButton: HTMLElement = document.getElementById("button__end");
 const relaxButton: HTMLElement = document.getElementById("button__relax");
 const openConfigurationsButton: HTMLElement = document.getElementById("button__configurations");
 
+// View
+const clock = new Clock(25);
+
+setInterval(updateView, 1000);
+
+function updateView() {
+    app.textContent = clock.getTime();
+}
+
+/**
+ * This function works like a event emitter, changing the appStatus when it is called.
+ * @param newAppStatus 
+ */
+export const updateStatus = function (newAppStatus: IStatus) {
+    appStatus = newAppStatus;
+    appStatus.onChange(clock);
+    return appStatus;
+}
+
 const app: HTMLElement = document.getElementById("app");
-var appStatus: IStatus = appPaused;
+var appStatus: IStatus = updateStatus(appPaused);
 
 // Buttons
 focusButton.addEventListener("click", () => {
@@ -27,20 +46,3 @@ openConfigurationsButton.addEventListener("click", () => {
     openConfigurationsWindow();
 })
 
-// View
-const clock = new Clock(25);
-
-setInterval(updateView, 1000);
-
-function updateView() {
-    app.textContent = clock.getTime();
-}
-
-/**
- * This function works like a event emitter, changing the appStatus when it is called.
- * @param newAppStatus 
- */
-export const updateStatus = function (newAppStatus: IStatus) {
-    appStatus = newAppStatus;
-    appStatus.onChange(clock);
-}
