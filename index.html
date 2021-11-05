@@ -9,9 +9,23 @@
   </head>
   <body>
     <div id="app" time=""></div>
-    <button class="button__focus paused">⏳ Start Focus</button>
-    <button class="button__relax disabled">🤩 Relaxing Time</button>
-    <button class="button__stop">❌ End Counter</button>
+    <button class="button__focus paused" id="button__focus">
+      ⏳ Start Focus
+    </button>
+    <button class="button__relax disabled" id="button__relax">
+      🤩 Relaxing Time
+    </button>
+    <button class="button__end" id="button__end">❌ End Counter</button>
+    <button class="button" id="button__configurations"></button>
+
+    <div id="configurations" class="configurations hidden">
+      <span>Focus Time:</span
+      ><input type="text" name="time__focus" id="time__focus" />
+      <span>Relax Time:</span
+      ><input type="text" name="time__relax" id="time__relax" />
+      <button>Save Configurations</button>
+    </div>
+
     <script type="module" src="/dist/app.js"></script>
   </body>
 </html>
