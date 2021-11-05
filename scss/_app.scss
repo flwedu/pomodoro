@@ -7,6 +7,26 @@
   font-size: 7rem;
 }
 
+#configurations {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 0;
+  padding: 2rem;
+
+  display: grid;
+  grid-column: auto;
+
+  border: 2px solid $unabledLight;
+  border-radius: 4px;
+
+  background-color: $lightColor;
+
+  > * {
+    margin: 0.5rem;
+  }
+}
+
 .hidden {
-  display: none;
+  display: none !important;
 }
