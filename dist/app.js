@@ -26,3 +26,11 @@ setInterval(updateView, 1000);
 function updateView() {
     app.textContent = clock.getTime();
 }
+/**
+ * This function works like a event emitter, changing the appStatus when it is called.
+ * @param newAppStatus
+ */
+export var updateStatus = function (newAppStatus) {
+    appStatus = newAppStatus;
+    appStatus.onChange(clock);
+};

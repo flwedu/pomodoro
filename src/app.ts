@@ -8,7 +8,7 @@ const relaxButton: HTMLElement = document.getElementById("button__relax");
 const openConfigurationsButton: HTMLElement = document.getElementById("button__configurations");
 
 const app: HTMLElement = document.getElementById("app");
-const appStatus: IStatus = appPaused;
+var appStatus: IStatus = appPaused;
 
 // Buttons
 focusButton.addEventListener("click", () => {
@@ -34,4 +34,13 @@ setInterval(updateView, 1000);
 
 function updateView() {
     app.textContent = clock.getTime();
+}
+
+/**
+ * This function works like a event emitter, changing the appStatus when it is called.
+ * @param newAppStatus 
+ */
+export const updateStatus = function (newAppStatus: IStatus) {
+    appStatus = newAppStatus;
+    appStatus.onChange(clock);
 }
