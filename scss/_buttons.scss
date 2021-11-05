@@ -1,5 +1,5 @@
 .button {
-  &__start {
+  &__focus {
     @include button($buttonPause);
 
     &.paused {
@@ -7,7 +7,16 @@
     }
   }
 
+  &__relax {
+    @include button($buttonRelax);
+  }
+
   &__stop {
     @include button($buttonStop);
   }
+}
+
+.disabled {
+  @include button($unabledLight);
+  color: $unabledLight;
 }
