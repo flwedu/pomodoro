@@ -9,6 +9,10 @@ var Clock = /** @class */ (function () {
                 _this.reduceOneSecond();
         }, 1000);
     }
+    Clock.prototype.changeInitialMinuts = function (initialMinuts) {
+        this._initialSeconds = initialMinuts * 60;
+        this.restartClock();
+    };
     Clock.prototype.getTimeIsCounting = function () {
         return this._counting;
     };

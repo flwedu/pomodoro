@@ -16,6 +16,11 @@ export default class Clock {
 
     }
 
+    changeInitialMinuts(initialMinuts: number) {
+        this._initialSeconds = initialMinuts * 60;
+        this.restartClock();
+    }
+
     getTimeIsCounting() {
         return this._counting;
     }
