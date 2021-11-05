@@ -1,5 +1,6 @@
+import { updateStatus } from "../app.js";
 import { updateStartButton } from "../buttonsFunctions.js";
-import { disableElement } from "../viewFunctions.js";
+import { disableElement, enableElement } from "../viewFunctions.js";
 import Clock from "./Clock.js"
 
 /**
@@ -22,11 +23,13 @@ const relaxButton: HTMLElement = document.getElementById("button__relax");
 export const focusRunning: IStatus = {
 
     onChange: (clock: Clock) => {
-        disableElement(relaxButton);
+        focusButton.textContent = updateStartButton(true);
+        focusButton.classList.remove('paused');
+        clock.startClock();
     },
 
     focusButtonAction: (clock: Clock) => {
-
+        updateStatus(appPaused);
     },
 
     relaxButtonAction: (clock: Clock) => {
@@ -34,14 +37,15 @@ export const focusRunning: IStatus = {
     },
 
     endButtonAction: (clock: Clock) => {
-
+        updateStatus(appStopped);
     }
 }
 
 export const appPaused: IStatus = {
 
     onChange: (clock: Clock) => {
-        disableElement(relaxButton);
+        enableElement(focusButton, relaxButton)
+        clock.pauseClock();
     },
 
     focusButtonAction: (clock: Clock) => {
@@ -51,12 +55,50 @@ export const appPaused: IStatus = {
     },
 
     relaxButtonAction: (clock: Clock) => {
+        updateStatus(focusRunning);
+    },
+
+    endButtonAction: (clock: Clock) => {
+        updateStatus(appStopped);
+    }
+}
+
+export const appStopped: IStatus = {
+
+    onChange: (clock: Clock) => {
+        clock.restartClock();
+        enableElement(relaxButton, focusButton);
+        focusButton.textContent = updateStartButton(false);
+        focusButton.classList.add('paused');
+    },
+
+    focusButtonAction: (clock: Clock) => {
+        updateStatus(focusRunning);
+    },
+
+    relaxButtonAction: (clock: Clock) => {
+        updateStatus(relaxRunning);
+    },
+
+    endButtonAction: (clock: Clock) => {
+        disableElement(endButton);
+    }
+}
+export const relaxRunning: IStatus = {
+
+    onChange: (clock: Clock) => {
+        disableElement(relaxButton);
+    },
+
+    focusButtonAction: (clock: Clock) => {
+        updateStatus(focusRunning);
+    },
+
+    relaxButtonAction: (clock: Clock) => {
 
     },
 
     endButtonAction: (clock: Clock) => {
-        clock.restartClock();
-        focusButton.textContent = updateStartButton(false);
-        focusButton.classList.add('paused');
+        updateStatus(appStopped);
     }
 }
