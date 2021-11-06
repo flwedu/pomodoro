@@ -1,22 +1,14 @@
 #button {
-  &__focus {
-    @include button($buttonPause);
-
-    &.paused {
-      @include button($buttonDefault);
-    }
-  }
-
-  &__relax {
-    @include button($buttonRelax);
-  }
-
   &__end {
-    @include button($buttonStop);
+    @include BigButton($buttonStop);
+  }
+
+  &__start {
+    @include BigButton($buttonDefault);
   }
 }
 
 .disabled {
-  @include button($unabledLight);
+  @include SmallButton($unabledLight);
   color: $unabledLight;
 }
