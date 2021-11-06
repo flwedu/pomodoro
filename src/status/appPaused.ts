@@ -3,8 +3,7 @@ import { enableElement } from "../viewFunctions.js";
 import { focusRunning } from "./focusRunning.js";
 import { relaxRunning } from "./relaxRunning.js";
 import { appStopped } from "./appStopped.js";
-import { button__focus, button__relax } from "../buttons/Buttons.js";
-import { updateStartButton } from "../buttonsFunctions.js";
+import { button__focus, button__relax, updateStartButton } from "../buttons/Buttons.js";
 
 export const appPaused = {
     onChange: () => {

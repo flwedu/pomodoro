@@ -1,8 +1,7 @@
-import { updateStartButton } from "../buttonsFunctions.js";
 import { EventEmitter } from "../core/EventEmitter.js";
 import { appStopped } from "./appStopped.js";
 import { appPaused } from "./appPaused.js";
-import { button__focus } from "../buttons/Buttons.js";
+import { button__focus, updateStartButton } from "../buttons/Buttons.js";
 
 export const focusRunning = {
     onChange: () => {
