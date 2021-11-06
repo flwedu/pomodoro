@@ -7,7 +7,11 @@ export const button__configurations = document.getElementById("button__configura
 
 // Emiting events
 button__start.addEventListener("click", () => {
-    EventEmitter.emit("StartClock", null);
+    EventEmitter.emit("StartClicked", null);
+})
+
+button__end.addEventListener("click", () => {
+    EventEmitter.emit("EndClicked", null);
 })
 
 button__configurations.addEventListener("click", () => {
