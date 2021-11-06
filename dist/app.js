@@ -1,7 +1,7 @@
 import { openConfigurationsWindow } from "./configurations.js";
 import { EventEmitter } from "./core/EventEmitter.js";
 import Clock from "./model/Clock.js";
-import { appPaused } from "./model/status.js";
+import { appPaused } from "./status/appPaused.js";
 var openConfigurationsButton = document.getElementById("button__configurations");
 var app = document.getElementById("app");
 var clock = new Clock(25);
