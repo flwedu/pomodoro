@@ -1,10 +1,8 @@
+import { button__start } from "./buttons/Buttons.js";
 import { openConfigurationsWindow } from "./configurations.js";
 import { EventEmitter } from "./core/EventEmitter.js";
 import Clock from "./model/Clock.js";
 
-const openConfigurationsButton: HTMLElement = document.getElementById(
-    "button__configurations"
-);
 const app: HTMLElement = document.getElementById("app");
 
 const clock = new Clock(25);
@@ -22,10 +20,12 @@ EventEmitter.listen("ChangeClock", (initialMinuts: number) => {
 });
 
 EventEmitter.listen("StartClock", () => {
+    button__start.innerHTML = "⏸️"
     clock.startClock();
 });
 
 EventEmitter.listen("PauseClock", () => {
+    button__start.innerHTML = "▶️";
     clock.pauseClock();
 });
 
@@ -33,7 +33,6 @@ EventEmitter.listen("RestartClock", () => {
     clock.restartClock();
 });
 
-// Listening to buttons click
-openConfigurationsButton.addEventListener("click", () => {
+EventEmitter.listen("OpenConfigurations", () => {
     openConfigurationsWindow();
 });
