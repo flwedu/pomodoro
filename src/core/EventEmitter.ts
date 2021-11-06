@@ -1,9 +1,7 @@
 export const EventEmitter = {
-
     events: new Map<string, Function[]>(),
 
     listen: (topic: string, callback: Function) => {
-
         const oldEvents = EventEmitter.events.get(topic);
         if (EventEmitter.events.has(topic)) {
             EventEmitter.events.set(topic, [...oldEvents, callback]);
@@ -12,9 +10,9 @@ export const EventEmitter = {
     },
 
     emit: (topic: string, data: any) => {
-        const listeners = EventEmitter.events.get(topic)
+        const listeners = EventEmitter.events.get(topic);
         if (Array.isArray(listeners) && listeners.length) {
-            listeners.forEach(event => event(data));
+            listeners.forEach((event) => event(data));
         }
-    }
-}
+    },
+};

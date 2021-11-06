@@ -21,5 +21,5 @@ export var EventEmitter = {
         if (Array.isArray(listeners) && listeners.length) {
             listeners.forEach(function (event) { return event(data); });
         }
-    }
+    },
 };
