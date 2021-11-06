@@ -6,9 +6,8 @@
   &__start {
     @include BigButton($buttonDefault);
   }
-}
 
-.disabled {
-  @include SmallButton($unabledLight);
-  color: $unabledLight;
+  &__configurations {
+    @include SmallButton($lightColor);
+  }
 }

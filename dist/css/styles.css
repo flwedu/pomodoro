@@ -1,6 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap");
 #app {
   font-family: "Roboto", sans-serif;
   font-size: 7rem;
@@ -44,12 +42,10 @@
   color: #00a3cc;
 }
 
-.disabled {
-  font-family: "Roboto", sans-serif;
-  font-weight: bold;
-  border: 1px solid #b8b8b8;
+#button__configurations {
+  font-size: 2rem;
+  border: 1px solid #f5f5f5;
   background-color: transparent;
   border-radius: 3px;
-  color: #b8b8b8;
-  color: #b8b8b8;
+  color: #f5f5f5;
 }

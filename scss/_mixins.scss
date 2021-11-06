@@ -1,8 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap");
-
 @mixin SmallButton($color) {
-  font-family: "Roboto", sans-serif;
-  font-weight: bold;
+  font-size: 2rem;
   border: 1px solid $color;
   background-color: transparent;
   border-radius: 3px;
