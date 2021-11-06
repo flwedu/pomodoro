@@ -28,40 +28,20 @@
   display: none !important;
 }
 
-#button__focus {
-  font-family: "Roboto", sans-serif;
-  font-weight: bold;
-  border: 1px solid #ffee01;
-  background-color: transparent;
-  border-radius: 3px;
-  color: #ffee01;
-}
-
-#button__focus.paused {
-  font-family: "Roboto", sans-serif;
-  font-weight: bold;
-  border: 1px solid #00a3cc;
-  background-color: transparent;
-  border-radius: 3px;
-  color: #00a3cc;
-}
-
-#button__relax {
-  font-family: "Roboto", sans-serif;
-  font-weight: bold;
-  border: 1px solid #8c62e0;
-  background-color: transparent;
-  border-radius: 3px;
-  color: #8c62e0;
-}
-
 #button__end {
-  font-family: "Roboto", sans-serif;
-  font-weight: bold;
+  font-size: 5rem;
   border: 1px solid #fb0000;
   background-color: transparent;
   border-radius: 3px;
   color: #fb0000;
+}
+
+#button__start {
+  font-size: 5rem;
+  border: 1px solid #00a3cc;
+  background-color: transparent;
+  border-radius: 3px;
+  color: #00a3cc;
 }
 
 .disabled {
