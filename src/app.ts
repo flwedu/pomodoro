@@ -16,10 +16,6 @@ function updateView() {
 }
 
 // Listening to events
-EventEmitter.listen("ChangeClock", (initialMinuts: number) => {
-    clock.changeInitialMinuts(initialMinuts);
-});
-
 EventEmitter.listen("StartClicked", () => {
     if (!clock.getTimeIsCounting()) {
         button__start.innerHTML = "⏸️"
@@ -38,10 +34,6 @@ EventEmitter.listen("EndClicked", () => {
     }
     button__start.innerHTML = "▶️";
     focusTime = !focusTime;
-});
-
-EventEmitter.listen("RestartClock", () => {
-    clock.restartClock();
 });
 
 EventEmitter.listen("OpenConfigurations", () => {
