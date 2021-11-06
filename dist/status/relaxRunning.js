@@ -1,11 +1,11 @@
+import { button__relax } from "../buttons/Buttons.js";
 import { EventEmitter } from "../core/EventEmitter.js";
 import { disableElement } from "../viewFunctions.js";
 import { appStopped } from "./appStopped.js";
 import { focusRunning } from "./focusRunning.js";
-export var relaxButton = document.getElementById("button__relax");
 export var relaxRunning = {
     onChange: function () {
-        disableElement(relaxButton);
+        disableElement(button__relax);
         EventEmitter.emit("ChangeClock", 5);
         EventEmitter.emit("StartClock", null);
     },

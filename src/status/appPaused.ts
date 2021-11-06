@@ -3,14 +3,11 @@ import { enableElement } from "../viewFunctions.js";
 import { focusRunning } from "./focusRunning.js";
 import { relaxRunning } from "./relaxRunning.js";
 import { appStopped } from "./appStopped.js";
-
-export const focusButton: HTMLElement = document.getElementById("button__focus");
-export const relaxButton: HTMLElement = document.getElementById("button__relax");
-export const endButton: HTMLElement = document.getElementById("button__end");
+import { button__focus, button__relax } from "../buttons/Buttons.js";
 
 export const appPaused = {
     onChange: () => {
-        enableElement(focusButton, relaxButton);
+        enableElement(button__focus, button__relax);
         EventEmitter.emit("PauseClock", null);
     },
 

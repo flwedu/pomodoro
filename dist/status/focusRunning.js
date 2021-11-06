@@ -2,12 +2,12 @@ import { updateStartButton } from "../buttonsFunctions.js";
 import { EventEmitter } from "../core/EventEmitter.js";
 import { appStopped } from "./appStopped.js";
 import { appPaused } from "./appPaused.js";
-export var focusButton = document.getElementById("button__focus");
+import { button__focus } from "../buttons/Buttons.js";
 export var focusRunning = {
     onChange: function () {
         EventEmitter.emit("StartClock", null);
-        focusButton.textContent = updateStartButton(true);
-        focusButton.classList.remove('paused');
+        button__focus.textContent = updateStartButton(true);
+        button__focus.classList.remove('paused');
     },
     button__focus: function () {
         EventEmitter.emit("ChangeStatus", appPaused);

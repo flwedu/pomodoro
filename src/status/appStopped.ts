@@ -1,18 +1,19 @@
+import {
+    button__end,
+    button__focus,
+    button__relax,
+} from "../buttons/Buttons.js";
 import { EventEmitter } from "../core/EventEmitter.js";
 import { disableElement, enableElement } from "../viewFunctions.js";
 import { focusRunning } from "./focusRunning.js";
 import { relaxRunning } from "./relaxRunning.js";
 
-export const focusButton: HTMLElement = document.getElementById("button__focus");
-export const relaxButton: HTMLElement = document.getElementById("button__relax");
-export const endButton: HTMLElement = document.getElementById("button__end");
-
 export const appStopped = {
     onChange: () => {
         EventEmitter.emit("ChangeClock", 25);
         EventEmitter.emit("RestartClock", null);
-        enableElement(relaxButton, focusButton);
-        disableElement(endButton);
+        enableElement(button__relax, button__focus);
+        disableElement(button__end);
     },
 
     button__focus: () => {
@@ -23,6 +24,5 @@ export const appStopped = {
         EventEmitter.emit("ChangeStatus", relaxRunning);
     },
 
-    button__end: () => {
-    }
+    button__end: () => { },
 };
