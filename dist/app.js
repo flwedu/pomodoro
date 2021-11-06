@@ -4,6 +4,7 @@ import { EventEmitter } from "./core/EventEmitter.js";
 import Clock from "./model/Clock.js";
 var app = document.getElementById("app");
 var clock = new Clock(25);
+var focusTime = true;
 // View
 setInterval(updateView, 1000);
 function updateView() {
@@ -13,13 +14,23 @@ function updateView() {
 EventEmitter.listen("ChangeClock", function (initialMinuts) {
     clock.changeInitialMinuts(initialMinuts);
 });
-EventEmitter.listen("StartClock", function () {
-    button__start.innerHTML = "⏸️";
-    clock.startClock();
-});
-EventEmitter.listen("PauseClock", function () {
+EventEmitter.listen("StartClicked", function () {
+    if (!clock.getTimeIsCounting()) {
+        button__start.innerHTML = "⏸️";
+        return clock.startClock();
+    }
     button__start.innerHTML = "▶️";
-    clock.pauseClock();
+    return clock.pauseClock();
+});
+EventEmitter.listen("EndClicked", function () {
+    if (focusTime) {
+        clock.changeInitialMinuts(5);
+    }
+    else {
+        clock.changeInitialMinuts(25);
+    }
+    button__start.innerHTML = "▶️";
+    focusTime = !focusTime;
 });
 EventEmitter.listen("RestartClock", function () {
     clock.restartClock();
