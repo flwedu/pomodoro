@@ -21,7 +21,9 @@ EventEmitter.listen("ChangeClock", function (initialMinuts) {
     clock.changeInitialMinuts(initialMinuts);
 });
 // Listening to buttons click
-document.querySelectorAll(".button").forEach(function (button) { button.addEventListener("click", function () { return appStatus[button.id](clock); }); });
+document.querySelectorAll(".button").forEach(function (button) {
+    button.addEventListener("click", function () { return appStatus[button.id](clock); });
+});
 openConfigurationsButton.addEventListener("click", function () {
     openConfigurationsWindow();
 });
