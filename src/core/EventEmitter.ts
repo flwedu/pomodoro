@@ -4,17 +4,17 @@ export const EventEmitter = {
 
     listen: (topic: string, callback: Function) => {
 
-        const oldEvents = EventEmitter.events.get(topic)
+        const oldEvents = EventEmitter.events.get(topic);
         if (EventEmitter.events.has(topic)) {
-            return EventEmitter.events.set(topic, [...oldEvents, callback])
+            EventEmitter.events.set(topic, [...oldEvents, callback]);
         }
+        return EventEmitter.events.set(topic, [callback]);
     },
 
     emit: (topic: string, data: any) => {
         const listeners = EventEmitter.events.get(topic)
-        if (listeners && listeners.length) {
-            listeners.forEach(event => event(data))
-
+        if (Array.isArray(listeners) && listeners.length) {
+            listeners.forEach(event => event(data));
         }
     }
 }

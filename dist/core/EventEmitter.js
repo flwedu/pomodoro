@@ -12,12 +12,13 @@ export var EventEmitter = {
     listen: function (topic, callback) {
         var oldEvents = EventEmitter.events.get(topic);
         if (EventEmitter.events.has(topic)) {
-            return EventEmitter.events.set(topic, __spreadArray(__spreadArray([], oldEvents, true), [callback], false));
+            EventEmitter.events.set(topic, __spreadArray(__spreadArray([], oldEvents, true), [callback], false));
         }
+        return EventEmitter.events.set(topic, [callback]);
     },
     emit: function (topic, data) {
         var listeners = EventEmitter.events.get(topic);
-        if (listeners && listeners.length) {
+        if (Array.isArray(listeners) && listeners.length) {
             listeners.forEach(function (event) { return event(data); });
         }
     }
