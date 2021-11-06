@@ -29,6 +29,18 @@ EventEmitter.listen("ChangeClock", (initialMinuts: number) => {
     clock.changeInitialMinuts(initialMinuts);
 });
 
+EventEmitter.listen("StartClock", () => {
+    clock.startClock();
+});
+
+EventEmitter.listen("PauseClock", () => {
+    clock.pauseClock();
+});
+
+EventEmitter.listen("RestartClock", () => {
+    clock.restartClock();
+});
+
 // Listening to buttons click
 document.querySelectorAll(".button").forEach((button) => {
     button.addEventListener("click", () => appStatus[button.id](clock));
