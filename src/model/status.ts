@@ -1,7 +1,6 @@
 import { updateStartButton } from "../buttonsFunctions.js";
 import { EventEmitter } from "../core/EventEmitter.js";
 import { disableElement, enableElement } from "../viewFunctions.js";
-import Clock from "./Clock.js"
 
 const focusButton: HTMLElement = document.getElementById("button__focus");
 const relaxButton: HTMLElement = document.getElementById("button__relax");
@@ -9,83 +8,82 @@ const endButton: HTMLElement = document.getElementById("button__end");
 
 export const focusRunning = {
 
-    onChange: (clock: Clock) => {
+    onChange: () => {
+        EventEmitter.emit("StartClock", null);
         focusButton.textContent = updateStartButton(true);
         focusButton.classList.remove('paused');
-        clock.startClock();
     },
 
-    button__focus: (clock: Clock) => {
+    button__focus: () => {
         EventEmitter.emit("ChangeStatus", appPaused);
     },
 
-    button__relax: (clock: Clock) => {
+    button__relax: () => {
 
     },
 
-    button__end: (clock: Clock) => {
+    button__end: () => {
         EventEmitter.emit("ChangeStatus", appStopped);
     }
 }
 
 export const appPaused = {
 
-    onChange: (clock: Clock) => {
+    onChange: () => {
         enableElement(focusButton, relaxButton)
-        clock.pauseClock();
+        EventEmitter.emit("PauseClock", null);
     },
 
-    button__focus: (clock: Clock) => {
-        clock.toggleCounting();
-        focusButton.classList.toggle("paused", !clock.getTimeIsCounting())
-        focusButton.textContent = updateStartButton(clock.getTimeIsCounting());
-    },
-
-    button__relax: (clock: Clock) => {
+    button__focus: () => {
         EventEmitter.emit("ChangeStatus", focusRunning);
     },
 
-    button__end: (clock: Clock) => {
+    button__relax: () => {
+        EventEmitter.emit("ChangeStatus", relaxRunning);
+    },
+
+    button__end: () => {
         EventEmitter.emit("ChangeStatus", appStopped);
     }
 }
 
 export const appStopped = {
 
-    onChange: (clock: Clock) => {
-        clock.restartClock();
+    onChange: () => {
+        EventEmitter.emit("ChangeClock", 25);
+        EventEmitter.emit("RestartClock", null);
         enableElement(relaxButton, focusButton);
-        focusButton.textContent = updateStartButton(false);
-        focusButton.classList.add('paused');
+        disableElement(endButton);
     },
 
-    button__focus: (clock: Clock) => {
+    button__focus: () => {
         EventEmitter.emit("ChangeStatus", focusRunning);
     },
 
-    button__relax: (clock: Clock) => {
+    button__relax: () => {
         EventEmitter.emit("ChangeStatus", relaxRunning);
     },
 
-    button__end: (clock: Clock) => {
-        disableElement(endButton);
+    button__end: () => {
     }
 }
 export const relaxRunning = {
 
-    onChange: (clock: Clock) => {
+    onChange: () => {
         disableElement(relaxButton);
+        EventEmitter.emit("ChangeClock", 5);
+        EventEmitter.emit("StartClock", null);
     },
 
-    button__focus: (clock: Clock) => {
+    button__focus: () => {
         EventEmitter.emit("ChangeStatus", focusRunning);
     },
 
-    button__relax: (clock: Clock) => {
+    button__relax: () => {
 
     },
 
-    button__end: (clock: Clock) => {
+    button__end: () => {
         EventEmitter.emit("ChangeStatus", appStopped);
     }
 }

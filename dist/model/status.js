@@ -5,64 +5,63 @@ var focusButton = document.getElementById("button__focus");
 var relaxButton = document.getElementById("button__relax");
 var endButton = document.getElementById("button__end");
 export var focusRunning = {
-    onChange: function (clock) {
+    onChange: function () {
+        EventEmitter.emit("StartClock", null);
         focusButton.textContent = updateStartButton(true);
         focusButton.classList.remove('paused');
-        clock.startClock();
     },
-    button__focus: function (clock) {
+    button__focus: function () {
         EventEmitter.emit("ChangeStatus", appPaused);
     },
-    button__relax: function (clock) {
+    button__relax: function () {
     },
-    button__end: function (clock) {
+    button__end: function () {
         EventEmitter.emit("ChangeStatus", appStopped);
     }
 };
 export var appPaused = {
-    onChange: function (clock) {
+    onChange: function () {
         enableElement(focusButton, relaxButton);
-        clock.pauseClock();
+        EventEmitter.emit("PauseClock", null);
     },
-    button__focus: function (clock) {
-        clock.toggleCounting();
-        focusButton.classList.toggle("paused", !clock.getTimeIsCounting());
-        focusButton.textContent = updateStartButton(clock.getTimeIsCounting());
-    },
-    button__relax: function (clock) {
+    button__focus: function () {
         EventEmitter.emit("ChangeStatus", focusRunning);
     },
-    button__end: function (clock) {
+    button__relax: function () {
+        EventEmitter.emit("ChangeStatus", relaxRunning);
+    },
+    button__end: function () {
         EventEmitter.emit("ChangeStatus", appStopped);
     }
 };
 export var appStopped = {
-    onChange: function (clock) {
-        clock.restartClock();
+    onChange: function () {
+        EventEmitter.emit("ChangeClock", 25);
+        EventEmitter.emit("RestartClock", null);
         enableElement(relaxButton, focusButton);
-        focusButton.textContent = updateStartButton(false);
-        focusButton.classList.add('paused');
+        disableElement(endButton);
     },
-    button__focus: function (clock) {
+    button__focus: function () {
         EventEmitter.emit("ChangeStatus", focusRunning);
     },
-    button__relax: function (clock) {
+    button__relax: function () {
         EventEmitter.emit("ChangeStatus", relaxRunning);
     },
-    button__end: function (clock) {
-        disableElement(endButton);
+    button__end: function () {
     }
 };
 export var relaxRunning = {
-    onChange: function (clock) {
+    onChange: function () {
         disableElement(relaxButton);
+        EventEmitter.emit("ChangeClock", 5);
+        EventEmitter.emit("StartClock", null);
     },
-    button__focus: function (clock) {
+    button__focus: function () {
         EventEmitter.emit("ChangeStatus", focusRunning);
     },
-    button__relax: function (clock) {
+    button__relax: function () {
     },
-    button__end: function (clock) {
+    button__end: function () {
         EventEmitter.emit("ChangeStatus", appStopped);
     }
 };
