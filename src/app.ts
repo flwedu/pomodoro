@@ -1,5 +1,5 @@
 import { button__start } from "./buttons/Buttons.js";
-import { openConfigurationsWindow } from "./configurations.js";
+import { configurations, openConfigurationsWindow } from "./configurations.js";
 import { EventEmitter } from "./core/EventEmitter.js";
 import Clock from "./model/Clock.js";
 
@@ -27,10 +27,10 @@ EventEmitter.listen("StartClicked", () => {
 
 EventEmitter.listen("EndClicked", () => {
     if (focusTime) {
-        clock.changeInitialMinuts(5);
+        clock.changeInitialMinuts(configurations.relaxTime);
     }
     else {
-        clock.changeInitialMinuts(25);
+        clock.changeInitialMinuts(configurations.focusTime);
     }
     button__start.innerHTML = "▶️";
     focusTime = !focusTime;
@@ -39,3 +39,7 @@ EventEmitter.listen("EndClicked", () => {
 EventEmitter.listen("OpenConfigurations", () => {
     openConfigurationsWindow();
 });
+
+EventEmitter.listen("SaveConfigurations", () => {
+    EventEmitter.emit("EndClicked", null);
+})
