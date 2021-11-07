@@ -9,10 +9,9 @@ export var configurations = {
     relaxTime: 5
 };
 export var openConfigurationsWindow = function () {
+    time__focus.value = configurations.focusTime;
+    time__relax.value = configurations.relaxTime;
     revealElement(window);
-};
-var closeConfigurationWindow = function () {
-    hideElement(window);
 };
 function getNewConfigurations() {
     configurations.focusTime = Number.parseInt(time__focus.value);
@@ -21,5 +20,5 @@ function getNewConfigurations() {
 saveButton.addEventListener("click", function () {
     getNewConfigurations();
     EventEmitter.emit("SaveConfigurations", configurations);
-    closeConfigurationWindow();
+    hideElement(window);
 });
