@@ -13,11 +13,9 @@ export const configurations = {
 }
 
 export const openConfigurationsWindow = () => {
+    time__focus.value = configurations.focusTime;
+    time__relax.value = configurations.relaxTime;
     revealElement(window);
-}
-
-const closeConfigurationWindow = () => {
-    hideElement(window);
 }
 
 function getNewConfigurations() {
@@ -29,5 +27,5 @@ function getNewConfigurations() {
 saveButton.addEventListener("click", () => {
     getNewConfigurations();
     EventEmitter.emit("SaveConfigurations", configurations);
-    closeConfigurationWindow();
+    hideElement(window);
 });
