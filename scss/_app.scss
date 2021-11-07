@@ -2,6 +2,11 @@
 @import "variables";
 @import "mixins";
 
+h1 {
+  font-family: "Roboto", sans-serif;
+  font-size: 2rem;
+}
+
 #app {
   font-family: "Roboto", sans-serif;
   font-size: 7rem;
@@ -16,6 +21,7 @@
 
   display: grid;
   grid-column: auto;
+  justify-items: center;
 
   border: 2px solid $unabledLight;
   border-radius: 4px;
