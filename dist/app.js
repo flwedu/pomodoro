@@ -5,14 +5,20 @@ import Clock from "./model/Clock.js";
 import { getStartButtonText, getTitleText } from "./view/textFuctions.js";
 var title = document.getElementById("time__title");
 var app = document.getElementById("app");
-var clock = new Clock(25);
-var focusTime = true;
+var clock;
+var focusTime;
 // View
-setInterval(updateView, 1000);
+window.setInterval(updateView, 1000);
 title.textContent = getTitleText(focusTime);
 function updateView() {
     app.textContent = clock.getTime();
 }
+// Document Lifecycle
+window.addEventListener("load", function () {
+    clock = new Clock(25);
+    focusTime = true;
+    app.textContent = clock.getTime();
+});
 // Listening to events
 EventEmitter.listen("StartClicked", function () {
     button__start.innerHTML = getStartButtonText(!clock.getTimeIsCounting());

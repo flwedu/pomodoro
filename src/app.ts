@@ -7,16 +7,23 @@ import { getStartButtonText, getTitleText } from "./view/textFuctions.js";
 const title = document.getElementById("time__title")
 const app: HTMLElement = document.getElementById("app");
 
-const clock = new Clock(25);
-var focusTime = true;
+var clock: Clock;
+var focusTime: boolean;
 
 // View
-setInterval(updateView, 1000);
+window.setInterval(updateView, 1000);
 title.textContent = getTitleText(focusTime);
 
 function updateView() {
     app.textContent = clock.getTime();
 }
+
+// Document Lifecycle
+window.addEventListener("load", () => {
+    clock = new Clock(25);
+    focusTime = true;
+    app.textContent = clock.getTime();
+});
 
 // Listening to events
 EventEmitter.listen("StartClicked", () => {
