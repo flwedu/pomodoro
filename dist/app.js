@@ -19,6 +19,22 @@ window.addEventListener("load", function () {
     focusTime = true;
     app.textContent = clock.getTime();
 });
+// Initializing service worker
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('dist/serviceWorker.js', { scope: "./dist/" })
+        .then(function (registration) {
+        var serviceWorker;
+        if (registration.active) {
+            serviceWorker = registration.active;
+        }
+        if (serviceWorker) {
+            console.log("service worker inicializado");
+        }
+    }).catch(function (err) { return console.error(err); });
+}
+else {
+    alert("browser doesn't support Service Worker");
+}
 // Listening to events
 EventEmitter.listen("StartClicked", function () {
     button__start.innerHTML = getStartButtonText(!clock.getTimeIsCounting());

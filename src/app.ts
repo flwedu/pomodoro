@@ -25,6 +25,22 @@ window.addEventListener("load", () => {
     app.textContent = clock.getTime();
 });
 
+// Initializing service worker
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('dist/serviceWorker.js', { scope: "./dist/" })
+        .then((registration) => {
+            var serviceWorker: ServiceWorker;
+            if (registration.active) {
+                serviceWorker = registration.active;
+            }
+            if (serviceWorker) {
+                console.log("service worker inicializado");
+            }
+        }).catch(err => console.error(err));
+} else {
+    alert("browser doesn't support Service Worker");
+}
+
 // Listening to events
 EventEmitter.listen("StartClicked", () => {
     button__start.innerHTML = getStartButtonText(!clock.getTimeIsCounting())
